@@ -9,12 +9,17 @@ import { UserService } from '../shared/user.service';
 })
 export class HomeComponent implements OnInit, AfterViewInit {
 
+  addUserShow: boolean = false;
+
   constructor(private router: Router, private userService: UserService) { }
 
   ngOnInit() {}
 
   ngAfterViewInit(){
     
+  }
+  AddUser(){
+    this.addUserShow = true;
   }
 
 

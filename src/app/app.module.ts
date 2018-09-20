@@ -17,6 +17,11 @@ import { AuthGuard } from './auth/auth.guard';
 import { AuthInterceptor } from './auth/auth.interceptor';
 
 import {MaterialModule} from '../app/material';
+import { AddUserComponent } from './user/add-user/add-user.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { ToastService } from './shared/toast.service';
+
+
 
 @NgModule({
   declarations: [
@@ -24,7 +29,8 @@ import {MaterialModule} from '../app/material';
     SignUpComponent,
     UserComponent,
     SignInComponent,
-    HomeComponent
+    HomeComponent,
+    AddUserComponent
   ],
   imports: [
     BrowserModule,
@@ -33,15 +39,20 @@ import {MaterialModule} from '../app/material';
     ToastrModule.forRoot(),
     BrowserAnimationsModule,
     RouterModule.forRoot(appRoutes),
-    MaterialModule
+    MaterialModule,
+    ReactiveFormsModule
   ],
-  providers: [UserService,AuthGuard,
+  providers: [
+    UserService,
+    AuthGuard,
     ,
     {
       provide : HTTP_INTERCEPTORS,
       useClass : AuthInterceptor,
       multi : true
-    }],
+    },
+    ToastService
+  ],
   bootstrap: [AppComponent]
 })  
 export class AppModule { }

@@ -20,27 +20,27 @@ export class SignUpComponent implements OnInit {
   }
 
   resetForm(form?: NgForm) {
-    if (form != null)
-      form.reset();
-    this.user = {
-      UserName: '',
-      Password: '',
-      Email: '',
-      FirstName: '',
-      LastName: ''
-    }
+    // if (form != null)
+    //   form.reset();
+    // this.user = {
+    //   UserName: '',
+    //   Password: '',
+    //   // Email: '',
+    //   // FirstName: '',
+    //   // LastName: ''
+    // }
   }
 
   OnSubmit(form: NgForm) {
-    this.userService.registerUser(form.value)
-      .subscribe((data: any) => {
-        if (data.Succeeded == true) {
-          this.resetForm(form);
-          this.toastr.success('User registration successful');
-        }
-        else
-          this.toastr.error(data.Errors[0]);
-      });
+    // this.userService.registerUser(form.value)
+    //   .subscribe((data: any) => {
+    //     if (data.Succeeded == true) {
+    //       this.resetForm(form);
+    //       this.toastr.success('User registration successful');
+    //     }
+    //     else
+    //       this.toastr.error(data.Errors[0]);
+    //   });
   }
 
 }
