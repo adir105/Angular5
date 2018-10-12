@@ -1,34 +1,52 @@
- <form class="formGroupStyle" [formGroup]="addUserForm">
-   <div formGroupName="userData">
-    <!-- username -->
-    <div class="form-group">
-      <label for="exampleInputEmail1">שם משתמש</label>
-      <input type="email" class="form-control" placeholder="הקלד שם משתמש" formControlName="username">
-    </div>
-    <!-- password1 -->
-    <div class="form-group">
-      <label for="exampleInputPassword1">סיסמה</label>
-      <input type="password" class="form-control" placeholder="הקלד סיסמה" formControlName="password1">
-    </div>
-    <!-- password2 -->
-    <div class="form-group">
-        <label for="exampleInputPassword1">אימות סיסמה</label>
-        <input type="password" class="form-control" placeholder="הקלד סיסמה בשנית" formControlName="password2">
-    </div>
-    <!-- isadmin -->
-      <div class="form-check">
-          <input type="checkbox" class="form-check-input" id="exampleCheck1" formControlName="admin">
-          <label class="form-check-label" for="exampleCheck1">?אדמין</label>
-        </div>
-        <div class="errors" *ngIf="passwordsEqualsValid">
-          <label style="color: red;">סיסמאות צריכות להיות שוות.</label>
-        </div>
-        <div class="errors" *ngIf="userNamePatternValid">
-            <label style="color: red;">שם משתמש חייב להכיל רק אותיות באנגלית ומספרים.</label>
+<div>
+<div>
+  <app-home></app-home>   
+  <div style="direction: rtl;">
+      <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="/home">בית</a></li>
+              <li class="breadcrumb-item active"><a>ניהול משתמשים</a></li>
+              <li class="breadcrumb-item active" aria-current="page">הוספת משתמש</li>
+          </ol>
+        </nav>
+  </div> 
+</div>
+
+<div style="margin-left: 30%; margin-top: 6%;">
+  
+  <form class="formGroupStyle" [formGroup]="addUserForm">
+     <div formGroupName="userData">
+      <!-- username -->
+      <div class="form-group">
+        <label for="exampleInputEmail1">שם משתמש</label>
+        <input type="email" class="form-control" placeholder="הקלד שם משתמש" formControlName="username">
+      </div>
+      <!-- password1 -->
+      <div class="form-group">
+        <label for="exampleInputPassword1">סיסמה</label>
+        <input type="password" class="form-control" placeholder="הקלד סיסמה" formControlName="password1">
+      </div>
+      <!-- password2 -->
+      <div class="form-group">
+          <label for="exampleInputPassword1">אימות סיסמה</label>
+          <input type="password" class="form-control" placeholder="הקלד סיסמה בשנית" formControlName="password2">
+      </div>
+      <!-- isadmin -->
+        <div class="form-check">
+            <input type="checkbox" class="form-check-input" id="exampleCheck4" formControlName="admin">
+            <label class="form-check-label" for="exampleCheck4">?אדמין</label>
           </div>
-        </div>
-        
-    <div style="text-align: right;">
-      <button type="button" class="btn btn-primary" (click)="AddUser()">הוסף משתמש</button>
-    </div>
-  </form>
+          <div class="errors" *ngIf="passwordsEqualsValid">
+            <label style="color: red;">סיסמאות צריכות להיות שוות.</label>
+          </div>
+          <div class="errors" *ngIf="userNamePatternValid">
+              <label style="color: red;">שם משתמש חייב להכיל רק אותיות באנגלית ומספרים.</label>
+            </div>
+          </div>
+          
+      <div style="text-align: right;">
+        <button type="button" class="btn btn-primary" (click)="addUser()">הוסף משתמש</button>
+      </div>
+    </form>
+  </div>
+</div>

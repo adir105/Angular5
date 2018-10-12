@@ -9,3 +9,11 @@
     color: red;
     direction: rtl;
 }
+
+.addUserStyle{
+    text-align: center;
+}
+
+a{
+    color: grey;
+}

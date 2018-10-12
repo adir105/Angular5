@@ -1,0 +1,43 @@
+<div>
+  <app-home></app-home>
+</div>
+
+<div style="direction: rtl;">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/home">בית</a></li>
+            <li class="breadcrumb-item active"><a>ניהול משתמשים</a></li>
+            <li class="breadcrumb-item active" aria-current="page">עריכת משתמש</li>
+        </ol>
+      </nav>
+</div> 
+
+<div class="editFormStyle">
+<form class="form-inline">
+    <label class="sr-only" for="inlineFormInputGroup">Username</label>
+    <div class="input-group">
+      <!-- <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="Username" [(ngModel)]="userName" [ngModelOptions]="{standalone: true}"> -->
+      <mat-form-field>
+          <mat-select placeholder="בחר שם משתמש" [formControl]="toppings" [(ngModel)]="userName">
+            <mat-option *ngFor="let topping of toppingList" [value]="topping">{{topping}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+    </div>
+  
+      <div class="form-check">
+        <input type="checkbox" class="form-check-input" id="exampleCheck3" [(ngModel)]="isAdmin" [ngModelOptions]="{standalone: true}">
+        <label class="form-check-label" for="exampleCheck3">?אדמין</label>
+      </div>
+      <div class="form-check">
+          <input type="checkbox" class="form-check-input" id="exampleCheck2" [(ngModel)]="isActive" [ngModelOptions]="{standalone: true}">
+          <label class="form-check-label" for="exampleCheck2">?פעיל</label>
+        </div>
+    <div class="editButtonStyle">
+    <button type="button" class="btn btn-primary" (click)="editUser()">ערוך משתמש</button>
+  </div>
+  <div class="editButtonStyle">
+      <button type="button" class="btn btn-danger" (click)="deleteUser()">מחק משתמש</button>
+    </div>
+  </form>
+</div>
+

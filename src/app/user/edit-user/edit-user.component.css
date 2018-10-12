@@ -1,0 +1,22 @@
+.editButtonStyle{
+    margin-left: 25px;
+}
+
+.form-inline{
+    margin-left: 25px;
+}
+
+.editFormStyle{
+    /* border-bottom-style: inset; */
+    margin-left: 25%;
+    margin-top: 10%;
+    border-radius: 25px;
+    border: 2px solid lightseagreen;
+    padding: 20px; 
+    width: 50%;
+    height: 35%;
+}
+
+a{
+    color: gray;
+}

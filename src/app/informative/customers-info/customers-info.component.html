@@ -1,0 +1,59 @@
+<div>
+    <div>
+        <app-home></app-home>
+    </div>
+    <div style="direction: rtl;">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/home">בית</a></li>
+                    <li class="breadcrumb-item active"><a>דפים אינפורמטיביים</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">הצגת לקוחות</li>
+                    <li class="breadcrumb-item active" *ngIf="!disableShowBtn"><a>{{ breadcrumbTitle }}</a></li>
+                </ol>
+              </nav>
+        </div> 
+    <!-- Default dropright button -->
+    <div class="container main" >
+      <div class="row">
+    
+      <div class="btn-group dropdown">
+          <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            {{ groupName }}
+          </button>
+          <div class="dropdown-menu">
+              <h6 class="dropdown-header"><strong>בחר קבוצה</strong></h6>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" *ngFor="let groupName of groupsNames" (click)="clickDropDown1(groupName)">{{ groupName }}</a>
+          </div>
+      </div>
+    
+      <div class="btn-group dropdown">
+          <button type="button" class="btn btn-secondary dropdown-toggle" [disabled]="disableCardBtn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              {{ cardName }}
+          </button>
+          <div class="dropdown-menu">
+              <!-- <h6 class="dropdown-header">{{ cardName }}</h6> -->
+              <h6 class="dropdown-header"><strong>בחר כרטיס</strong></h6>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" *ngFor="let card of currentCards" (click)="clickDropDown2(card)">{{card.sDescription}}</a>
+          </div>
+        </div>
+    
+      <div class="btn-group">
+          <button type="button" class="btn btn-success" (click)="show()" [disabled]="disableShowBtn">
+            הצג
+          </button>
+      </div>
+
+    </div>
+
+    <!-- <div class="row">
+        <div>
+            <button [disabled]="disableShowBtn" mat-raised-button (click)="openDialog()">מסננים</button>
+        </div>
+    </div> -->
+
+
+      
+    
+    

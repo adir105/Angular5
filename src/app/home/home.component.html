@@ -1,27 +1,28 @@
-<nav style="background-color: lightseagreen">
+<div>
+<nav style="width: 100%;" style="background-color: lightseagreen">
   <div class="nav-wrapper">
     <a href="#" class="brand-logo left">
-      <i class="material-icons">cloud</i>Dotnet Mob App</a>
+      <i class="material-icons">cloud</i>
+      מערכת לניהול משתמשים</a>
       <ul class="right hide-on-med-and-down"> 
-          <li><a (click)="Logout()">התנתק</a></li>
+          <li><a (click)="Logout()">התנתק {{ userName }}</a></li>
       </ul>
     <ul id="nav-mobile" class="right hide-on-med-and-down">
-      <!-- <li><a (click)="UserManagment()">ניהול משתמשים</a></li>
-      <li><a (click)="InformationPages()">דפים אינפורמטיבים</a></li>
-      <li><a (click)="CustomerManagment()">ניהול לקוחות</a></li> -->
+
+     
       <!-- ניהול משתמשים -->
-<div class="btn-group">
+<div class="btn-group" *ngIf="isAdmin">
     <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
       ניהול משתמשים
     </button>
     <div class="dropdown-menu">
       <a class="dropdown-item" (click)="AddUser()">הוספת משתמש</a>
-      <a class="dropdown-item" href="#">עריכת משתמש</a>
+      <a class="dropdown-item" (click)="EditUser()">עריכת משתמש</a>
       <div class="dropdown-divider"></div>
       <a class="dropdown-item" href="#">Separated link</a>
     </div>
   </div>
-  <div class="btn-group">
+  <div class="btn-group" *ngIf="isAdmin">
       <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         ניהול לקוחות
       </button>
@@ -37,7 +38,7 @@
           דפים אינפורמטיביים
         </button>
         <div class="dropdown-menu">
-          <a class="dropdown-item" href="#">Action</a>
+          <a class="dropdown-item" (click)="ShowCustomers()">הצגת לקוחות</a>
           <a class="dropdown-item" href="#">Another action</a>
           <div class="dropdown-divider"></div>
           <a class="dropdown-item" href="#">Separated link</a>
@@ -46,8 +47,6 @@
     </ul>
   </div>
 </nav>
-
-<div class="addUserDiv" *ngIf="addUserShow">
-    <br>
-    <add-user></add-user>
 </div>
+
+<router-outlet></router-outlet>

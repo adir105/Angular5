@@ -1,0 +1,27 @@
+.btnPages{
+    text-align: center;
+}
+/* 
+.btn-link{
+    text-align: center;
+} */
+
+.noDataStyle{
+    text-align: center;
+}
+
+div.scrollmenu {
+    overflow: auto;
+    white-space: nowrap;
+}
+
+/* .example-form {
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+  } */
+  
+  .example-full-width {
+    width: 100%;
+  }
+  

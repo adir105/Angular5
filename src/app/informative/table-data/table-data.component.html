@@ -1,0 +1,73 @@
+<div>
+  <div>
+      <customers-info></customers-info>
+  </div>
+  
+
+<div style="width: inherit;">
+
+  <div class="row">
+
+      <div style="margin-left: 20px; width: 200px;">
+        <input type="text" placeholder="בחר כרטיס" [(ngModel)]="iCardNumber"  matInput [formControl]="myControl" [matAutocomplete]="auto">
+        <mat-autocomplete #auto="matAutocomplete">
+          <mat-option *ngFor="let option of filteredOptions | async" [value]="option" (click)="changeData()">
+            {{option}}
+          </mat-option>
+        </mat-autocomplete>
+      </div>
+
+      <div style="margin-left: 20px;">
+        <mat-form-field class="row">
+            <mat-select placeholder="בחר שנה" [(ngModel)]="year" (change)="changeData()">
+              <mat-option>All</mat-option>
+              <mat-option *ngFor="let year of years" [value]="year">{{year}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div style="margin-left: 40px;">
+          <mat-form-field class="row">
+              <mat-select placeholder="בחר חודש" [(ngModel)]="month" (change)="changeData()">
+                <mat-option>All</mat-option>
+                <mat-option *ngFor="let month of months" [value]="month">{{month}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+  </div>
+
+  <div *ngIf="show"> 
+
+    <div class="scrollmenu">
+
+<table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col" *ngFor="let header of headersTable">{{ header }}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of dataToShow; let i = index; let head of headersTable">
+        <th scope="row">{{ (i+1) + (countInPage*(currentPage-1)) }}</th>
+        <td *ngFor="let header of headersTable; let i2 = index;">{{ data[headersTable[i2]] }}</td>
+      </tr>      
+    </tbody>
+  </table>
+
+</div>
+  <br>
+
+  <div class="btnPages">
+    <button class="btn btn-link" *ngFor="let item of createArray(); let i = index" #cureentPage (click)="goToPage(i+1)">{{ i+1 }}</button>
+  </div>
+  
+</div>
+
+</div>
+
+<div class="noDataStyle" *ngIf="!show">
+    <label class="form-check-label">אין מידע להצגה</label>
+</div>
+
+</div>

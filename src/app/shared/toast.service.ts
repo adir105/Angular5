@@ -4,16 +4,21 @@ declare var toastr: any;
 @Injectable()
 export class ToastService {
 
-  constructor() { 
+  constructor() {
+
     this.Setting();
+  }
+
+  setSettings(newSettings: any){
+    toastr.options = newSettings;
   }
 
   Success(title: string, msg?: string){
     toastr.success(title, msg);
   }
 
-  Warnning(title: string, msg?: string){
-    toastr.warnning(title, msg);
+  Warning(title: string, msg?: string){
+    toastr.warning(title, msg);
   }
 
   Info(title: string, msg?: string){
@@ -22,6 +27,10 @@ export class ToastService {
 
   Error(title: string, msg?: string){
     toastr.error(title, msg);
+  }
+
+  Yes(){
+    console.log('Yes');
   }
 
   Setting(){

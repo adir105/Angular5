@@ -1,0 +1,41 @@
+
+<div class="container">
+
+  <div class="row" style="direction: rtl;">
+  <h2 mat-dialog-title><b>מסננים</b></h2>
+</div>
+<mat-dialog-content class="mat-typography" style="direction: rtl;">
+
+<form [formGroup]="filterForm">
+  <div class="row">
+    <div class="form-check cb_isactive" style="direction: rtl;">
+        <input type="checkbox" class="form-check-input" id="activeCheckBox" formControlName="actives">
+        <label class="form-check-label" for="activeCheckBox">פעילים</label>
+  </div>
+</div>
+
+    <div class="row">
+
+      <div class="dateStyle" style="width: 100px;">
+          <mat-datepicker-toggle style="direction: rtl;" matSuffix [for]="pickerStartDate">
+          </mat-datepicker-toggle>
+          <mat-datepicker #pickerStartDate></mat-datepicker>
+          <input matInput [matDatepicker]="pickerStartDate" placeholder="תאריך התחלה" formControlName="fromDate">
+        </div>
+      <div class="dateStyle" style="width: 100px; margin-right: 25px;">
+          <mat-datepicker-toggle matSuffix [for]="pickerEndtDate"></mat-datepicker-toggle>
+          <mat-datepicker #pickerEndtDate></mat-datepicker>
+          <input matInput [matDatepicker]="pickerEndtDate" placeholder="תאריך סיום" formControlName="endDate">
+        </div>
+    </div> 
+  </form> 
+</mat-dialog-content>
+
+<div class="row">
+  <mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>בטל</button>
+    <button mat-button (click)="saveFilters()" cdkFocusInitial>שמור</button>
+  </mat-dialog-actions>
+</div>
+
+</div>

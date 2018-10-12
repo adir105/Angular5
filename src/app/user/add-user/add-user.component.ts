@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { UserService } from '../../shared/user.service';
 import { User } from '../../shared/user.model';
-import { AlertsService } from 'angular-alert-module';
 import { ToastService } from '../../shared/toast.service';
+import { ResponseModel, State } from '../../shared/ResponseModel';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -13,22 +14,21 @@ import { ToastService } from '../../shared/toast.service';
 })
 export class AddUserComponent implements OnInit {
 
-  addUserForm: FormGroup;
-  passwordsEqualsValid: boolean;
-  userNamePatternValid: boolean;
-  private isFormValid: boolean;
+  private addUserForm: FormGroup;
+  private passwordsEqualsValid: boolean;
+  private userNamePatternValid: boolean;
 
-  constructor(private userService: UserService, private toastService: ToastService) { 
+  constructor(private userService: UserService,
+              private toastService: ToastService,
+              private router: Router) { 
     this.addUserForm = this.createFormGroup();
-
   }
 
   ngOnInit() {
-    this.isFormValid = false;
     this.passwordsEqualsValid = false;
     this.userNamePatternValid = false;
   }
-  AddUser(isadmin){
+  addUser(){
     if(this.addUserForm.value['userData'].password1 !== this.addUserForm.value['userData'].password2){
         this.passwordsEqualsValid = true;
     }
@@ -42,29 +42,12 @@ export class AddUserComponent implements OnInit {
         let user: User = {
           UserName: this.addUserForm.value['userData'].username,
           Password: this.addUserForm.value['userData'].password1,
-          UserRoleId: 0,
+          UserRoleId: this.addUserForm.value['userData'].admin? 1 : 2,
           IsActive: 1
         };
-        if(this.addUserForm.value['userData'].admin === true){
-          user.UserRoleId = 1;
-        }
-        this.userService.addUser(user).subscribe(
-          (data)=> {
-            this.toastService.Success('Successfully', 'The user added.');
-            this.addUserForm.reset();
-          },
 
-          (error)=> {
-            if(error['status'] === 409){
-              this.addUserForm.reset();
-              this.toastService.Error('Error - 409', 'The Username is already exist.');    
-            }
-            else{
-              this.addUserForm.reset();
-              this.toastService.Error('Error', error.status);
-            }
-          }
-        );
+        this.toastService.setSettings(this.getOptionsSettings());
+        this.addUserDB(user);
       }
       else{
         this.userNamePatternValid = true;
@@ -72,11 +55,32 @@ export class AddUserComponent implements OnInit {
       }
     }
   }
-  
-  checkValidation(){
-    
-  }
 
+  addUserDB(user: User){
+    this.userService.addUser(user).subscribe(
+      (data: ResponseModel)=> {
+        if(data.State == State.Success){
+        this.toastService.Success('Success!', '.המשתמש נוסף בהצלחה');
+        this.addUserForm.reset();
+        this.router.navigate(['/home']);
+        }
+        else if(data.State == State.Conflict){
+          this.addUserForm.reset();
+          this.toastService.Error('Error - 409 Conflict', '.משתמש זה כבר קיים במערכת');    
+        }
+        else{
+          this.toastService.Error(data.Error, data.Data);    
+          this.addUserForm.reset();
+        }
+      },
+
+      (error)=> {
+          this.addUserForm.reset();
+          this.toastService.Error('Error', error);
+        }
+    );
+  }
+  
   createFormGroup() {
     return new FormGroup({
       userData: new FormGroup({
@@ -88,4 +92,25 @@ export class AddUserComponent implements OnInit {
     });
   }
 
-}
+  getOptionsSettings(){
+    var settings = {
+      "closeButton": false,
+      "debug": false,
+      "newestOnTop": false,
+      "progressBar": false,
+      "positionClass": "toast-bottom-full-width",
+      "preventDuplicates": false,
+      "onclick": null,
+      "showDuration": "300",
+      "hideDuration": "1000",
+      "timeOut": "5000",
+      "extendedTimeOut": "1000",
+      "showEasing": "swing",
+      "hideEasing": "linear",
+      "showMethod": "fadeIn",
+      "hideMethod": "fadeOut"
+    }
+    return settings;
+  }
+  }
+
